@@ -51,7 +51,7 @@
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=http://192.168.178.2/dists/autoyast/leap423srv.ai.vmware.xml ",
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml ",
         "<enter><wait>"
       ],
 
@@ -93,7 +93,7 @@
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=http://192.168.178.2/dists/autoyast/leap423srv.ai.vmware.xml ",
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml ",
         "<enter><wait>"
       ],
 
@@ -130,7 +130,7 @@
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=http://192.168.178.2/dists/autoyast/leap423srv.ai.libvirt.xml ",
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.libvirt.xml ",
         "<enter><wait>"
       ],
 
