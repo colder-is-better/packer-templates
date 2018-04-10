@@ -26,7 +26,6 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "iso_target_path": "/tmp/packer_cache/",
       "output_directory": "/tmp/packer_out/openSUSE-Leap-{{user `dist_ver`}}-vmware",
 
       "vm_name": "openSUSE Leap {{user `dist_ver`}}",
@@ -68,7 +67,6 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "iso_target_path": "/tmp/packer_cache/", 
       "output_directory": "/tmp/packer_out/openSUSE-Leap-{{user `dist_ver`}}-virtualbox",
 
       "vm_name": "opensuse-leap-{{user `dist_ver`}}",
@@ -111,7 +109,6 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "iso_target_path": "/tmp/packer_cache/",
       "output_directory": "/tmp/packer_out/openSUSE-Leap-{{user `dist_ver`}}-libvirt",
 
       "vm_name": "opensuse-leap-{{user `dist_ver`}}",
