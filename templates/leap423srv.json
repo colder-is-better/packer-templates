@@ -3,7 +3,7 @@
   {
     "dist_ver": "42.3",
 
-    "iso_url": "http://ftp.uni-erlangen.de/pub/mirrors/opensuse/distribution/leap/42.3/iso/openSUSE-Leap-42.3-NET-x86_64.iso",
+    "iso_url": "http://cvarelas.suse.de/iso/openSUSE-Leap-42.3-NET-x86_64.iso",
     "iso_checksum": "dfa2963dea8d1667ff4563e6da9c06d6",
     "iso_checksum_type": "md5",
 
@@ -20,12 +20,14 @@
       "name": "vmware",
       "type": "vmware-iso",
 
+      "fusion_app_path": "{{user `fusion_path`}}",
+
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "fusion_app_path": "{{user `fusion_path`}}",
-      "output_directory": "~/packer_out/openSUSE-Leap-{{user `dist_ver`}}-vmware",
+      "iso_target_path": "/tmp/packer_cache/",
+      "output_directory": "/tmp/packer_out/openSUSE-Leap-{{user `dist_ver`}}-vmware",
 
       "vm_name": "openSUSE Leap {{user `dist_ver`}}",
       "guest_os_type": "opensuse-64",
@@ -66,7 +68,8 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "output_directory": "~/packer_out/openSUSE-Leap-{{user `dist_ver`}}-virtualbox",
+      "iso_target_path": "/tmp/packer_cache/", 
+      "output_directory": "/tmp/packer_out/openSUSE-Leap-{{user `dist_ver`}}-virtualbox",
 
       "vm_name": "opensuse-leap-{{user `dist_ver`}}",
       "guest_os_type": "OpenSUSE_64",
@@ -108,7 +111,8 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "output_directory": "~/packer_out/openSUSE-Leap-{{user `dist_ver`}}-libvirt",
+      "iso_target_path": "/tmp/packer_cache/",
+      "output_directory": "/tmp/packer_out/openSUSE-Leap-{{user `dist_ver`}}-libvirt",
 
       "vm_name": "opensuse-leap-{{user `dist_ver`}}",
       "accelerator": "{{user `qemu_accelerator`}}",
