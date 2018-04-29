@@ -17,6 +17,48 @@
 
   "builders": [
     {
+      "name": "virtualbox",
+      "type": "virtualbox-iso",
+
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum_url": "{{user `iso_checksum_url`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+
+      "output_directory": "{{user `out_dir_prefix`}}/openSUSE-Leap-{{user `dist_ver`}}-virtualbox",
+
+      "vm_name": "opensuse-leap-{{user `dist_ver`}}",
+      "guest_os_type": "OpenSUSE_64",
+      "guest_additions_mode": "disable",
+      "hard_drive_interface": "sata",
+
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}" ],
+		[ "modifyvm", "{{.Name}}", "--audio", "none" ],
+        [ "modifyvm", "{{.Name}}", "--usb", "off" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+
+      "ssh_username": "root",
+      "ssh_password": "topsecret",
+      "ssh_wait_timeout": "90m",
+      "disk_size": 131072,
+      "ssh_port": 22,
+      "headless": true,
+
+      "boot_command": [
+        "<esc><enter><wait>",
+        "linux ",
+        "lang=en_US ",
+        "textmode=1 ",
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml ",
+        "<enter><wait>"
+      ],
+
+      "shutdown_command": "shutdown -P now"
+    },
+
+    {
       "name": "vmware",
       "type": "vmware-iso",
 
@@ -39,48 +81,6 @@
         "memsize": "{{user `memory`}}",
         "numvcpus": "{{user `cpus`}}"
       },
-
-      "ssh_username": "root",
-      "ssh_password": "topsecret",
-      "ssh_wait_timeout": "90m",
-      "disk_size": 131072,
-      "ssh_port": 22,
-      "headless": true,
-
-      "boot_command": [
-        "<esc><enter><wait>",
-        "linux ",
-        "lang=en_US ",
-        "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml ",
-        "<enter><wait>"
-      ],
-
-      "shutdown_command": "shutdown -P now"
-    },
-
-    {
-      "name": "virtualbox",
-      "type": "virtualbox-iso",
-
-      "iso_url": "{{user `iso_url`}}",
-      "iso_checksum_url": "{{user `iso_checksum_url`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
-
-      "output_directory": "{{user `out_dir_prefix`}}/openSUSE-Leap-{{user `dist_ver`}}-virtualbox",
-
-      "vm_name": "opensuse-leap-{{user `dist_ver`}}",
-      "guest_os_type": "OpenSUSE_64",
-      "guest_additions_mode": "disable",
-      "hard_drive_interface": "sata",
-
-      "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}" ],
-		[ "modifyvm", "{{.Name}}", "--audio", "none" ],
-        [ "modifyvm", "{{.Name}}", "--usb", "off" ],
-        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
-      ],
 
       "ssh_username": "root",
       "ssh_password": "topsecret",
