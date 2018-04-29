@@ -9,8 +9,6 @@
 
     "out_dir_prefix": "/tmp/packer_out",
 
-    "qemu_accelerator": "kvm",
-
     "memory": "2048",
     "cpus": "2",
 
