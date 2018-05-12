@@ -11,6 +11,7 @@
 
     "memory": "2048",
     "cpus": "2",
+    "os_disk_size": "131072",
 
     "fusion_path": "/Applications/VMware Fusion.app"
   },
@@ -24,12 +25,13 @@
       "iso_checksum_url": "{{user `iso_checksum_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "output_directory": "{{user `out_dir_prefix`}}/openSUSE-Leap-{{user `dist_ver`}}-virtualbox",
+      "output_directory": "{{user `out_dir_prefix`}}/oSUSE-Leap-{{user `dist_ver`}}-{{build_name}}",
 
-      "vm_name": "opensuse-leap-{{user `dist_ver`}}",
+      "vm_name": "osuse-leap-{{user `dist_ver`}}",
       "guest_os_type": "OpenSUSE_64",
       "guest_additions_mode": "disable",
       "hard_drive_interface": "sata",
+      "disk_size": "{{user `os_disk_size`}}",
 
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}" ],
@@ -41,21 +43,21 @@
 
       "ssh_username": "root",
       "ssh_password": "topsecret",
-      "ssh_wait_timeout": "90m",
-      "disk_size": 131072,
       "ssh_port": 22,
-      "headless": true,
+      "ssh_timeout": "90m",
 
       "boot_command": [
         "<esc><enter><wait>",
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml ",
-        "<enter><wait>"
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml",
+        "<enter>"
       ],
 
-      "shutdown_command": "shutdown -P now"
+      "shutdown_command": "shutdown -P now",
+
+      "headless": true
     },
 
     {
@@ -68,13 +70,13 @@
       "iso_checksum_url": "{{user `iso_checksum_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "output_directory": "{{user `out_dir_prefix`}}/openSUSE-Leap-{{user `dist_ver`}}-vmware",
+      "output_directory": "{{user `out_dir_prefix`}}/oSUSE-Leap-{{user `dist_ver`}}-{{build_name}}",
 
-      "vm_name": "openSUSE Leap {{user `dist_ver`}}",
+      "vm_name": "osuse-leap-{{user `dist_ver`}}",
       "guest_os_type": "opensuse-64",
-      "sound": "false",
-      "usb": "false",
-      "vnc_disable_password": "true",
+      "sound": false,
+      "usb": false,
+      "vnc_disable_password": true,
       "tools_upload_flavor": "",
 
       "vmx_data": {
@@ -82,23 +84,25 @@
         "numvcpus": "{{user `cpus`}}"
       },
 
+      "disk_size": "{{user `os_disk_size`}}",
+
       "ssh_username": "root",
       "ssh_password": "topsecret",
-      "ssh_wait_timeout": "90m",
-      "disk_size": 131072,
       "ssh_port": 22,
-      "headless": true,
+      "ssh_timeout": "90m",
 
       "boot_command": [
         "<esc><enter><wait>",
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml ",
-        "<enter><wait>"
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml",
+        "<enter>"
       ],
 
-      "shutdown_command": "shutdown -P now"
+      "shutdown_command": "shutdown -P now",
+
+      "headless": true
     },
 
     {
@@ -109,33 +113,36 @@
       "iso_checksum_url": "{{user `iso_checksum_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
 
-      "output_directory": "{{user `out_dir_prefix`}}/openSUSE-Leap-{{user `dist_ver`}}-libvirt",
+      "output_directory": "{{user `out_dir_prefix`}}/oSUSE-Leap-{{user `dist_ver`}}-{{build_name}}",
 
-      "vm_name": "opensuse-leap-{{user `dist_ver`}}",
-      "accelerator": "{{user `qemu_accelerator`}}",
-      "disk_interface": "virtio",
+      "accelerator": "kvm",
+      "vm_name": "osuse-leap-{{user `dist_ver`}}",
       "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "disk_size": "{{user `os_disk_size`}}",
       "format": "qcow2",
 
-      "qemuargs": [ [ "-m", "{{user `memory`}}M" ] ],
+      "qemuargs": [
+        [ "-m", "{{user `memory`}}M" ]
+      ],
 
       "ssh_username": "root",
       "ssh_password": "topsecret",
-      "ssh_wait_timeout": "90m",
-      "disk_size": 131072,
       "ssh_port": 22,
-      "headless": true,
+      "ssh_timeout": "90m",
 
       "boot_command": [
-        "<esc><enter><wait>",
+        "<wait5><esc><enter><wait>",
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.libvirt.xml ",
-        "<enter><wait>"
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.libvirt.xml",
+        "<enter>"
       ],
 
-      "shutdown_command": "shutdown -P now"
+      "shutdown_command": "shutdown -P now",
+
+      "headless": true 
     }
   ],
 
