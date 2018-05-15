@@ -23,12 +23,12 @@ printf "[prov_script] refreshing newly added repositories...\n"
 
 printf "[prov_script] patching things up :P\n"
 
-/usr/bin/zypper -n patch > /dev/null 2>&1
+/usr/bin/zypper -n patch --with-interactive > /dev/null 2>&1
 zypper_ec=$?
 
 if [ $zypper_ec -eq 103 ]; then
 	printf "[prov_script] zypper has been updated, re-running it now...\n"
-	/usr/bin/zypper -n patch > /dev/null 2>&1
+	/usr/bin/zypper -n patch --with-interactive > /dev/null 2>&1
 elif [ $zypper_ec -ne 0 ]; then
 	printf "[prov_script] *** something went wrong, zypper returned error code %d ***\n", $zypper_ec
     exit 1
