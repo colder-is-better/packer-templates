@@ -6,7 +6,7 @@ REPO_NON_OSS="http://ftp.uni-erlangen.de/opensuse/distribution/leap/42.3/repo/no
 REPO_OSS_UPDATES="http://ftp.uni-erlangen.de/opensuse/update/leap/42.3/oss/"
 REPO_NON_OSS_UPDATES="http://ftp.uni-erlangen.de/opensuse/update/leap/42.3/non-oss/"
 
-printf "[prov_script] removing installation media repositories...\n"
+printf "[prov_script] removing installation media repository...\n"
 
 /usr/bin/zypper -q rr 1
 
@@ -23,15 +23,15 @@ printf "[prov_script] refreshing newly added repositories...\n"
 
 printf "[prov_script] patching things up :P\n"
 
-/usr/bin/zypper -n patch --with-interactive > /dev/null 2>&1
+/usr/bin/zypper -n patch --with-interactive --with-optional > /dev/null 2>&1
 zypper_ec=$?
 
 if [ $zypper_ec -eq 103 ]; then
 	printf "[prov_script] zypper has been updated, re-running it now...\n"
-	/usr/bin/zypper -n patch --with-interactive > /dev/null 2>&1
+	/usr/bin/zypper -n patch --with-interactive --with-optional > /dev/null 2>&1
 elif [ $zypper_ec -ne 0 ]; then
 	printf "[prov_script] *** something went wrong, zypper returned error code %d ***\n", $zypper_ec
-    exit 1
+	exit 1
 fi
 
 printf "[prov_script] updating any packages that cannot be patched...\n"
