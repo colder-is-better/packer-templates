@@ -1,0 +1,66 @@
+{
+  "variables":
+  {
+    "sles12sp3_iso_url": "http://download.suse.de/install/SLE-12-SP3-Server-GM/SLE-12-SP3-Server-DVD-x86_64-GM-DVD1.iso",
+    "sles12sp3_iso_checksum": "48408157ef667100671b22f92c3e20771ccf2100108b96e3ae83d8df30abddd5",
+    "sles12sp3_iso_checksum_type": "sha256",
+
+    "out_dir_prefix": "/tmp/packer_out",
+	"machine_name_suffix": "zero",
+
+    "memory": "2048",
+    "cpus": "2",
+    "os_disk_size": "131072"
+  },
+
+  "builders": [
+    {
+      "name": "sles12sp3",
+      "type": "qemu",
+
+      "iso_url": "{{user `sles12sp3_iso_url`}}",
+      "iso_checksum": "{{user `sles12sp3_iso_checksum`}}",
+      "iso_checksum_type": "{{user `sles12sp3_iso_checksum_type`}}",
+
+      "output_directory": "{{user `out_dir_prefix`}}/{{build_name}}",
+
+      "accelerator": "kvm",
+      "vm_name": "{{build_name}}{{user `machine_name_suffix`}}.qcow2",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "disk_size": "{{user `os_disk_size`}}",
+      "format": "qcow2",
+
+      "qemuargs": [
+        [ "-m", "{{user `memory`}}M" ]
+      ],
+
+      "ssh_username": "root",
+      "ssh_password": "topsecret",
+      "ssh_port": 22,
+      "ssh_timeout": "90m",
+
+      "boot_command": [
+        "<wait5><esc><enter><wait>",
+        "linux ",
+        "lang=en_US ",
+        "textmode=1 ",
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/sles12sp3.ai.libvirt.xml",
+        "<enter>"
+      ],
+
+      "shutdown_command": "shutdown -P now",
+
+      "headless": true
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "pause_before": "2m",
+      "expect_disconnect": true,
+      "script": "../provisioners/{{build_name}}.prov.sh"
+    }
+  ]
+}
