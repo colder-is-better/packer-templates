@@ -116,7 +116,7 @@
       "output_directory": "{{user `out_dir_prefix`}}/oSUSE-Leap-{{user `dist_ver`}}-{{build_name}}",
 
       "accelerator": "kvm",
-      "vm_name": "osuse-leap-{{user `dist_ver`}}",
+      "vm_name": "osuse-leap-{{user `dist_ver`}}.qcow2",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "disk_size": "{{user `os_disk_size`}}",
