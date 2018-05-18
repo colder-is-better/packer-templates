@@ -33,6 +33,10 @@ printf "[prov_script] updating any packages that cannot be patched...\n"
 
 /usr/bin/zypper -n up > /dev/null 2>&1
 
+printf "[prov_script] installing QEMU Guest Agent...\n"
+
+/usr/bin/zypper -n in qemu-guest-agent > /dev/null 2>&1
+
 printf "[prov_script] all done, enjoy this brand new SLES12SP3 system!\n"
 
 exit 0
