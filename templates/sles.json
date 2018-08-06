@@ -6,7 +6,6 @@
     "sles12sp3_iso_checksum_type": "sha256",
 
     "out_dir_prefix": "/tmp/packer_out",
-	"machine_name_suffix": "zero",
 
     "memory": "2048",
     "cpus": "2",
@@ -15,7 +14,50 @@
 
   "builders": [
     {
-      "name": "sles12sp3",
+      "name": "sles12sp3-virtualbox",
+      "type": "virtualbox-iso",
+
+      "iso_url": "{{user `sles12sp3_iso_url`}}",
+      "iso_checksum": "{{user `sles12sp3_iso_checksum`}}",
+      "iso_checksum_type": "{{user `sles12sp3_iso_checksum_type`}}",
+
+      "output_directory": "{{user `out_dir_prefix`}}/{{build_name}}",
+
+      "vm_name": "{{build_name}}",
+      "guest_os_type": "OpenSUSE_64",
+      "guest_additions_mode": "disable",
+      "hard_drive_interface": "sata",
+      "disk_size": "{{user `os_disk_size`}}",
+
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}" ],
+        [ "modifyvm", "{{.Name}}", "--audio", "none" ],
+        [ "modifyvm", "{{.Name}}", "--usb", "off" ],
+        [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
+      ],
+
+      "ssh_username": "root",
+      "ssh_password": "topsecret",
+      "ssh_port": 22,
+      "ssh_timeout": "90m",
+
+      "boot_command": [
+        "<esc><enter><wait>",
+        "linux ",
+        "lang=en_US ",
+        "textmode=1 ",
+        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/sles12sp3.ai.vmware.xml",
+        "<enter>"
+      ],
+
+      "shutdown_command": "shutdown -P now",
+
+      "headless": true
+    },
+
+    {
+      "name": "sles12sp3-libvirt",
       "type": "qemu",
 
       "iso_url": "{{user `sles12sp3_iso_url`}}",
@@ -25,7 +67,7 @@
       "output_directory": "{{user `out_dir_prefix`}}/{{build_name}}",
 
       "accelerator": "kvm",
-      "vm_name": "{{build_name}}{{user `machine_name_suffix`}}.qcow2",
+      "vm_name": "{{build_name}}.qcow2",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "disk_size": "{{user `os_disk_size`}}",
@@ -60,7 +102,7 @@
       "type": "shell",
       "pause_before": "2m",
       "expect_disconnect": true,
-      "script": "../provisioners/{{build_name}}.prov.sh"
+      "script": "../provisioners/sles.prov.sh"
     }
   ]
 }
