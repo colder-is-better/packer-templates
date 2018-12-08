@@ -57,7 +57,7 @@
     },
 
     {
-      "name": "vmware",
+      "name": "sles12sp3-vmware",
       "type": "vmware-iso",
 
       "fusion_app_path": "{{user `fusion_path`}}",
@@ -75,11 +75,8 @@
       "vnc_disable_password": true,
       "tools_upload_flavor": "",
 
-      "vmx_data": {
-        "memsize": "{{user `memory`}}",
-        "numvcpus": "{{user `cpus`}}"
-      },
-
+      "cpus": "{{user `cpus`}}",
+      "memory": "{{user `memory`}}",
       "disk_size": "{{user `os_disk_size`}}",
 
       "ssh_username": "root",
