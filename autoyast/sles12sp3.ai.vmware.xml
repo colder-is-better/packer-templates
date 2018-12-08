@@ -23,18 +23,6 @@
     </global>
     <loader_type>grub2</loader_type>
   </bootloader>
-  <ca_mgm>
-    <CAName>YaST_Default_CA</CAName>
-    <ca_commonName>YaST Default CA (qboxes.here)</ca_commonName>
-    <country>US</country>
-    <locality/>
-    <organisation/>
-    <organisationUnit/>
-    <password>ENTER PASSWORD HERE</password>
-    <server_email>postmaster@qboxes.here</server_email>
-    <state/>
-    <takeLocalServerName config:type="boolean">true</takeLocalServerName>
-  </ca_mgm>
   <deploy_image>
     <image_installation config:type="boolean">false</image_installation>
   </deploy_image>
