@@ -1,0 +1,65 @@
+---
+- hosts: all
+
+  vars_files:
+    - vars/provisioning.yml
+
+  gather_facts: no
+
+  tasks:
+
+  - name: Create 2048-bit SSH key for root
+    user:
+      name: root
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: "/root/.ssh/id_rsa"
+
+  - name: Disable automatic DNS configuration
+    lineinfile:
+      path: /etc/sysconfig/network/config
+      regexp: "^NETCONFIG_DNS_POLICY="
+      line: "NETCONFIG_DNS_POLICY=''"
+
+  - name: Set domain search order in /etc/resolv.conf
+    lineinfile:
+      path: /etc/resolv.conf
+      regexp: "^search"
+      line: "search {{ domain_name }}"
+
+  - name: Set domain nameserver IP in /etc/resolv.conf
+    lineinfile:
+      path: /etc/resolv.conf
+      regexp: "^nameserver"
+      line: "nameserver {{ the_name_server }}"
+
+  - name: Remove media repository added during installation
+    zypper_repository:
+      name: "SLES12-SP3-12.3-0"
+      state: absent
+
+  - name: Add OS_POOL repository
+    zypper_repository:
+      name: "OS_POOL"
+      repo: "{{ os_pool_repo }}"
+      auto_import_keys: yes
+      autorefresh: no
+      state: present
+
+  - name: Add OS_UPDATES repository
+    zypper_repository:
+      name: "OS_UPDATES"
+      repo: "{{ os_updates_repo }}"
+      auto_import_keys: yes
+      autorefresh: yes
+      state: present
+
+  - name: Refresh all repositories
+    zypper_repository:
+      repo: '*'
+      runrefresh: yes
+
+  - name: Apply any package updates
+    zypper:
+      name: '*'
+      state: latest
