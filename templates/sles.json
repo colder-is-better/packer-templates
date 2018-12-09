@@ -53,7 +53,7 @@
 
       "shutdown_command": "shutdown -P now",
 
-      "headless": false
+      "headless": true
     },
 
     {
@@ -94,7 +94,7 @@
       ],
 
       "shutdown_command": "shutdown -P now",
-
+      "skip_export": true,
       "headless": true
     },
 
@@ -141,10 +141,9 @@
 
   "provisioners": [
     {
-      "type": "shell",
+      "type": "ansible",
       "pause_before": "2m",
-      "expect_disconnect": true,
-      "script": "../provisioners/sles.prov.sh"
+      "playbook_file": "../provisioners/sles.playbook.yml"
     }
   ]
 }
