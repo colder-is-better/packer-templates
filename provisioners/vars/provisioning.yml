@@ -1,0 +1,5 @@
+domain_name: "qam.local"
+the_name_server: "10.160.2.88"
+
+os_pool_repo: "http://download.suse.de/ibs/SUSE/Products/SLE-SERVER/12-SP3/x86_64/product"
+os_updates_repo: "http://download.suse.de/ibs/SUSE/Updates/SLE-SERVER/12-SP3/x86_64/update"
