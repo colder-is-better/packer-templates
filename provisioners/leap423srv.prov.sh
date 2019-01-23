@@ -1,10 +1,10 @@
 #!/bin/bash
 
-REPO_OSS="http://ftp.uni-erlangen.de/opensuse/distribution/leap/42.3/repo/oss/"
-REPO_NON_OSS="http://ftp.uni-erlangen.de/opensuse/distribution/leap/42.3/repo/non-oss/"
+REPO_OSS="https://download.opensuse.org/distribution/leap/42.3/repo/oss/"
+REPO_NON_OSS="https://download.opensuse.org/distribution/leap/42.3/repo/non-oss/"
 
-REPO_OSS_UPDATES="http://ftp.uni-erlangen.de/opensuse/update/leap/42.3/oss/"
-REPO_NON_OSS_UPDATES="http://ftp.uni-erlangen.de/opensuse/update/leap/42.3/non-oss/"
+REPO_OSS_UPDATES="https://download.opensuse.org/update/leap/42.3/oss/"
+REPO_NON_OSS_UPDATES="https://download.opensuse.org/update/leap/42.3/non-oss/"
 
 printf "[prov_script] removing installation media repository...\n"
 
