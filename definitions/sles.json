@@ -148,7 +148,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "pause_before": "2m",
+      "pause_before": "5m",
       "playbook_file": "../provisioners/sles.playbook.yml"
     }
   ]
