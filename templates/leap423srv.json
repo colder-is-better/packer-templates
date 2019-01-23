@@ -36,7 +36,7 @@
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}" ],
-		[ "modifyvm", "{{.Name}}", "--audio", "none" ],
+        [ "modifyvm", "{{.Name}}", "--audio", "none" ],
         [ "modifyvm", "{{.Name}}", "--usb", "off" ],
         [ "modifyvm", "{{.Name}}", "--rtcuseutc", "on" ]
       ],
@@ -46,12 +46,14 @@
       "ssh_port": 22,
       "ssh_timeout": "90m",
 
+      "http_directory": "autoyast",
+
       "boot_command": [
         "<esc><enter><wait>",
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml",
+        "autoyast2=http://{{.HTTPIP}}:{{.HTTPPort}}/leap423srv.ai.vmware.xml",
         "<enter>"
       ],
 
@@ -91,12 +93,14 @@
       "ssh_port": 22,
       "ssh_timeout": "90m",
 
+      "http_directory": "autoyast",
+
       "boot_command": [
         "<esc><enter><wait>",
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.vmware.xml",
+        "autoyast2=http://{{.HTTPIP}}:{{.HTTPPort}}/leap423srv.ai.vmware.xml",
         "<enter>"
       ],
 
@@ -131,12 +135,14 @@
       "ssh_port": 22,
       "ssh_timeout": "90m",
 
+      "http_directory": "autoyast",
+
       "boot_command": [
         "<wait5><esc><enter><wait>",
         "linux ",
         "lang=en_US ",
         "textmode=1 ",
-        "autoyast2=https://raw.githubusercontent.com/colder-is-better/packer-templates/master/autoyast/leap423srv.ai.libvirt.xml",
+        "autoyast2=http://{{.HTTPIP}}:{{.HTTPPort}}/leap423srv.ai.libvirt.xml",
         "<enter>"
       ],
 
